@@ -7,9 +7,11 @@
 \usepackage[toc,page]{appendix}
 \usepackage{graphicx}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.JPG}
+\graphicspath{{imgs/}}
 \usepackage[hidelinks]{hyperref}
 \usepackage{caption}
 \captionsetup{labelfont=bf}
 \usepackage{url}
 \newcommand\autsection[2]{%
-  \section[#1~/ {\normalfont\small\itshape#2}]{#1{~~~{\normalfont\normalsize\textit{#2}}}}}
+  \section[#1~/ {\normalfont\small\textit{#2}}]{#1{~~~{\normalfont\normalsize\textit{#2}}}}}
+\usepackage{varioref}
