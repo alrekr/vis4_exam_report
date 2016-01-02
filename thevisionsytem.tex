@@ -1,0 +1,20 @@
+%!TEX root = vis4_report.tex
+\autsection{The vision system}{Hsin-Yu Lee}
+If we don’t want to use shape primitives as our way to generate grasping gestures, there is an alternative way when we want way to recognize the object just base on the stereo images from the cameras. The approach in~\cite{kootstra} tries to imitate the way that human vision system try to recognize unknown things. The analyzing system is called “biological-motivated hierarchical vision system”~\cite{pugeault}, which also called “ECV”, the “Early Cognitive Vision”. Literally, the system was inspired by the primate’s vision system. By using this system, the 3D features of edge and surface of the object are naturally aligned together. The basic analyzing process of the system can be seen in Figure~\vref{fig:kootstra10}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth, page=11, trim=1.5cm 22.8cm 12.2cm 3cm, clip]{KootstraEtAl}
+	\caption{a. The images captured from the stereo cameras. b. The analyzing result of implementing the ECV on the stereo images. From~\cite{kootstra}.}
+	\label{fig:kootstra10}
+\end{figure}
+
+\autsubsection{ECV system}{Hsin-Yu Lee}
+Figure~\vref{fig:kootstra2} shows the hierarchical vision system “ECV” implemented in the paper~\cite{kootstra}. The system recognizes objects by 2D and 3D geometrical and appearance relations between visual entities at the different levels of the hierarchy in two major domains, which are edge and surface. The process of recognizing the edge is: First, use the algorithm of image processing to transfer the stereo images into the 2D line segment images. Second, use the mathematic way to find out the smallest line segments. Then, combine the line segments into a larger segment. Finally, the edge of the objects will come out. It’s also similar to the process of forming the surfaces of the object. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth, page=3, trim=4cm 15cm 4cm 3.6cm, clip]{KootstraEtAl}
+	\caption{The hierarchical representation of contour and texture information in the ECV system. The stereo images at the bottom are the real world images captured by the camera, the others pictures show the process in the simulator try to find the object based on the edge and surface information. From~\cite{kootstra}.}
+	\label{fig:kootstra2}
+\end{figure}
