@@ -1,6 +1,5 @@
 %!TEX root = vis4_report.tex
-\section{Grasping}
-\autsubsection{Motivation}{Malthe Høj-Sunesen}
+\autsection{Motivation}{Malthe Høj-Sunesen}
 Humans spend years learning how to grasp objects.
 Babies have a hard time figuring out how to grasp even the most simple objects,
 and parents solve that problem by giving babies and children plastic cutlery, bouncy, soft toys and always walking around with an eye on each finger.
@@ -16,7 +15,7 @@ If a service robot is supposed to clean up mess left after a human, it is almost
 If an industrial robot can figure out the best grasp autonomously for an object it would decrease operator dependency,
 leading to faster setup and lower costs for the company.
 
-\autsubsection{Simplifying objects to primitive models}{Malthe Høj-Sunesen}\label{ssec:millergrasp}
+\autsection{Simplifying objects to primitive models}{Malthe Høj-Sunesen}\label{ssec:millergrasp}
 Biederman suggested that elements can be broken down to geons, basic elements describing one feature of an object.
 
 \begin{figure}
@@ -54,7 +53,17 @@ An example of the found grasps can be seen in Figure~\ref{fig:miller6}.
 \label{fig:miller6}.
 \end{figure}
 
-\autsubsection{Learning to grasp through attempts}{Malthe Høj-Sunesen}
+\autsection{Edges and textures}{Hsin-Yu Lee}
+If we don’t want to use shape primitives as our way to generate grasping gestures, there is an alternative way when we want way to recognize the object just base on the stereo images from the cameras. The approach in~\cite{kootstra} tries to imitate the way that human vision system try to recognize unknown things. The analyzing system is called “biological-motivated hierarchical vision system”~\cite{pugeault}, which also called “ECV”, the “Early Cognitive Vision”. Literally, the system was inspired by the primate’s vision system. By using this system, the 3D features of edge and surface of the object are naturally aligned together. The basic analyzing process of the system can be seen in Figure~\vref{fig:kootstra10}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth, page=11, trim=1.5cm 22.8cm 12.2cm 3cm, clip]{KootstraEtAl}
+	\caption{a. The images captured from the stereo cameras. b. The analyzing result of implementing the ECV on the stereo images. From~\cite{kootstra}.}
+	\label{fig:kootstra10}
+\end{figure}
+
+\autsection{Learning to grasp through attempts}{Malthe Høj-Sunesen}
 Much like~\cite{miller} in Section~\ref{ssec:millergrasp} tried to emulate how the human vision works according to Biederman,
 so do~\cite{detry} try to emulate how a child learns to grasp objects.
 Any parent will tell you that their child did not quite know how to actively grasp\footnote{Let alone letting it go again!} toys from the beginning.
@@ -91,7 +100,7 @@ In the end, the robot has learned how to pick up an object from any angle,
 and is able to choose the best possible grasp in any situation.
 This is indeed how children and grown-ups know how to pick up objects as well.
 
-\autsubsection{Elementary grasping actions}{Hsin-Yu Lee}
+\autsection{Elementary grasping actions}{Hsin-Yu Lee}
 The Elementary Grasping Actions, which also called EGA, is the specific grasping gestures used in the paper~\cite{kootstra} that was implemented once after we find the object by the ECV system. 
 The EGA was also mentioned and defined in the paper~\cite{pugeault}. 
 The Figure~\vref{fig:kootstra1} shows the three different ways of grasping object base on edge and surface information separately. 
@@ -105,3 +114,70 @@ We can simply choose one method to grasp something; we also can use the simulato
 	\caption{The elementary grasping actions (EGA) are illustrated on the top with some examples of real grasps on the bottom. (a-c) The three contour-based EGAs. The red lines indicate the selected contours. (d-f) The surface-based EGAs. The dark faces show the selected surface. The first letter in the naming scheme marks the type of features used to generate a grasp. ’c’ stands for contour and ’s’ for surface. The first subscript stands for two or three fingers. The last subscript marks the general type of grasp, where ’1’ is an encompassing grasp, ’2’ is a pinch grasp from the top and ’3’ is a pinch grasp from the side of the surface. For each type of grasping action, an example is shown consisting of an original image, a snapshot of the ECV representation along with the selected grasp, and the grasp execution in the simulation/real setup. From~\cite{kootstra}}
 	\label{fig:kootstra1}
 \end{figure}
+
+\section{Experiments of grasping actions}
+\autsubsection{Kootstra et al}{Hsin-Yu Lee}
+To gain insights in the performance of the different grasp generation methods, they have been tested in two different experimental setups.
+The experiments result presented in the paper~\cite{kootstra} shows the performance of each grasping method and also the performance of mixed actions. 
+
+The Figure~\vref{fig:kootstra20} shows part of the experiment result that the grasping has been tested in the real world environment and using the simulator. 
+The bar plots give the distributions of all grasps averaged over the scenes. 
+The results are split up for the different conditions: single objects standing up, single objects laying down, two objects close together, and two objects far apart. 
+Results are labeled with nograsp when a method does not generate any grasps for a given scene. 
+In addition, the consistency of the methods is shown by the black error bars, 
+which give the average standard errors on the proportion of successful grasps (stable+slipped), 
+where the standard error is calculated over the set of different poses within a pose condition of a scene, 
+e.g., the four different poses of the coca-cola bottle standing upright.
+
+It can be seen that, in general, the surface-based grasp methods perform better than the contour-based methods. 
+The encompassing grasps, i.e., EGA$_1$ grasps, are more successful than the pinch grasps. 
+The three-finger surface-boundary grasp, sb$_3$EGA$_1$ outperforms the two-finger surface-boundary grasp, sb$_2$EGA$_1$. 
+All grasping methods perform better when the single objects are standing upright than when they are laying down. 
+For the double-object scenes, the amount of successful grasps is similar for the objects apart or close together, 
+but in the latter case, there is a higher proportion of collision. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, page=15, trim=1.6cm 19.2cm 1.4cm 3cm, clip]{KootstraEtAl}
+	\caption{Grasp results for the hybrid real-world and simulated experiments. 
+		The stacked-bar plots show the average distribution of all grasps over all scenes. 
+		The stable and slipped grasps are considered successful grasps, where the object is held in the hand after lifting. 
+		The gray area shows the proportion of scenes where the methods do not suggest any grasps. 
+		The black error bars give the average standard errors on the proportion of successful grasps (stable+slipped). 
+		The standard error is calculated over the set of different poses within a pose condition of a scene.
+		 The error bars show the consistency of the method to different poses of the same object. From~\cite{kootstra}.}
+	\label{fig:kootstra20}
+\end{figure}
+
+\autsubsubsection{Grasp success as a function}{Hsin-Yu Lee}
+The average grasp success rates for the different methods lie between 0.2 and 0.6. 
+Although this is the high performance for a system that does not use any direct presetting information from the object, 
+it still means that the robot will often not be able to grasp an object at the first attempt. 
+Assuming that the robot can make a new grasp attempt when the previous grasp fails, we investigate how the success rate increase as a function of the number of grasp attempts.
+ 
+Figure~\vref{fig:kootstra21} shows the grasp success as a function of the number of grasp attempts, N.
+We define it as success if any of the grasp attempts is successful. 
+The plots show the average success rate for all scenes over 20 randomized runs.
+And as can be seen in Figure~\vref{fig:kootstra21} good grasp results are generally achieved already after a few attempts,
+especially when the different grasp methods are combined. The combination of sparseness, complementarity,
+and high performance is the main contribution of our method.
+ 
+ \begin{figure}
+ 	\centering
+ 	\fbox{\includegraphics[width=\textwidth, trim=3.2cm 19.cm 3.2cm 3cm, clip, page=16]{KootstraEtAl}}
+ 	\caption{Grasp results for the hybrid real-world and simulated experiments. The plots show the average success rate as a function of the number of grasp attempts for the different grasp methods. The black line shows the performance when the different methods are combined. The fact that the combined results surpass the results of the individual methods shows that they are complementary. From~\cite{kootstra}.}
+ 	\label{fig:kootstra21}
+ \end{figure}
+ 
+ \autsubsection{Detry et al}{Malthe Høj-Sunesen}
+ In order to evaluate the theory, a test setup was made. This setup features \emph{an industrial robot arm, a force torque sensor, a two-finger gripper, and a stereo camera}~\cite{detry}. 
+ The robot is controlled by an FSM:
+ \begin{enumerate}
+ 	\item Estimate object pose, align grasp density,
+ 	\item Produce desired grasp,
+ 	\item Submit grasp to grasp planner,
+ 	\item Move gripper to pose,
+ 	\item Close gripper fingers,
+ 	\item Lift object, and
+ 	\item Drop object
+ \end{enumerate}
