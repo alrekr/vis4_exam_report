@@ -162,22 +162,39 @@ And as can be seen in Figure~\vref{fig:kootstra21} good grasp results are genera
 especially when the different grasp methods are combined. The combination of sparseness, complementarity,
 and high performance is the main contribution of our method.
  
- \begin{figure}
- 	\centering
- 	\fbox{\includegraphics[width=\textwidth, trim=3.2cm 19.cm 3.2cm 3cm, clip, page=16]{KootstraEtAl}}
- 	\caption{Grasp results for the hybrid real-world and simulated experiments. The plots show the average success rate as a function of the number of grasp attempts for the different grasp methods. The black line shows the performance when the different methods are combined. The fact that the combined results surpass the results of the individual methods shows that they are complementary. From~\cite{kootstra}.}
- 	\label{fig:kootstra21}
- \end{figure}
+\begin{figure}
+	\centering
+	\fbox{\includegraphics[width=\textwidth, trim=3.2cm 19.cm 3.2cm 3cm, clip, page=16]{KootstraEtAl}}
+	\caption{Grasp results for the hybrid real-world and simulated experiments. The plots show the average success rate as a function of the number of grasp attempts for the different grasp methods. The black line shows the performance when the different methods are combined. The fact that the combined results surpass the results of the individual methods shows that they are complementary. From~\cite{kootstra}.}
+	\label{fig:kootstra21}
+\end{figure}
  
- \autsubsection{Detry et al}{Malthe Høj-Sunesen}
- In order to evaluate the theory, a test setup was made. This setup features \emph{an industrial robot arm, a force torque sensor, a two-finger gripper, and a stereo camera}~\cite{detry}. 
- The robot is controlled by an FSM:
- \begin{enumerate}
- 	\item Estimate object pose, align grasp density,
- 	\item Produce desired grasp,
- 	\item Submit grasp to grasp planner,
- 	\item Move gripper to pose,
- 	\item Close gripper fingers,
- 	\item Lift object, and
- 	\item Drop object
- \end{enumerate}
+\autsubsection{Detry et al}{Malthe Høj-Sunesen}
+In order to evaluate the theory, a test setup was made. This setup features \emph{an industrial robot arm, a force torque sensor, a two-finger gripper, and a stereo camera}~\cite{detry}. 
+The robot is controlled by an FSM:
+\begin{enumerate}
+	\item Estimate object pose, align grasp density,
+	\item Produce desired grasp,
+	\item Submit grasp to grasp planner,
+	\item Move gripper to pose,
+	\item Close gripper fingers,
+	\item Lift object, and
+	\item Drop object
+\end{enumerate}
+ 
+The grasp can fail at several places in the FSM: Pose estimation, path planning, moving, grasping, and lifting. 
+These failures affect the grasp success when the robot is controlled through the FSM and attempts to grasp the object.
+
+Figure~\vref{fig:detry16} shows how initial (from camera) densities, empirical (inferred from initial) densities and best possible grasp densities rate in successful grasps.
+Figure~\ref{fig:detry16} is composed of two subfigures; subfigure \textbf{a} shows success with both planner-detected failures and physical failures,
+while subfigure \textbf{b} shows only physical failures. 
+In either case, it is obvious that the initial densities does not fare well (except for the knife in subfigure \textbf{b}). 
+Empirical grasps fare a lot better; however, the best achievable grasp is, as the name suggest, the best way to get a good grasp. 
+It is obvious that if planner error could be avoided in the simulator, the success rate would greatly improve.
+ 
+\begin{figure}
+	\centering
+	\includegraphics[page=28, trim=5cm 10cm 5cm 15cm, clip]{DetryEtAl}
+	\caption{For both a and b: Red color denotes initial densities, green color denotes empirical densities, blue color denotes best achievable grasp}
+	\label{fig:detry16}
+\end{figure}
