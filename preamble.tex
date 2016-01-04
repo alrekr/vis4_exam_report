@@ -12,6 +12,11 @@
 \usepackage{caption}
 \captionsetup{labelfont=bf}
 \usepackage{url}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{Page~\thepage~of~\pageref{LastPage}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand\autsection[2]{%
   \section[#1~/ {\normalfont\small\textit{#2}}]{#1{~~~{\normalfont\normalsize\textit{#2}}}}}
 \newcommand\autsubsection[2]{
